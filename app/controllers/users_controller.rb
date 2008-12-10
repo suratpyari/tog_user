@@ -14,7 +14,6 @@ class UsersController < ApplicationController
     
     # If there is no users yet, set the first one to admin.
     @user.admin = User.find(:all).blank?
-    
     @user.register! if captcha_validated && @user.valid?
     if @user.errors.empty?
       redirect_back_or_default(Tog::Config["plugins.tog_user.default_redirect_on_signup"])
