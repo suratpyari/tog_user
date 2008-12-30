@@ -45,6 +45,7 @@ class UsersController < ApplicationController
       user = User.find_by_email(params[:user][:email])
       if user
         user.forgot_password
+        UserMailer.deliver_reset_notification(user)
         flash[:notice] = I18n.t("tog_user.user.password_reset_sent", :email => user.email)
       else
         flash[:error] = I18n.t("tog_user.user.password_reset_not_found", :email => params[:user][:email])
