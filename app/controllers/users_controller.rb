@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     @user.register! if captcha_validated && @user.valid?
     if @user.errors.empty?
       redirect_back_or_default(Tog::Config["plugins.tog_user.default_redirect_on_signup"])
-      flash[:notice] = I18n.t("tog_user.user.sign_up")
+      flash[:notice] = I18n.t("tog_user.user.sign_up")+"Before you can use your new account you must activate it. Please check your email"
     else
       render :action => 'new'
     end
